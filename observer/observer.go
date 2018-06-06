@@ -1,7 +1,6 @@
 package observer
 
 import (
-	"fmt"
 	"strings"
 	"time"
 
@@ -9,6 +8,7 @@ import (
 	"github.com/ieee0824/skyclad/client/iface"
 	"github.com/ieee0824/skyclad/client/io"
 	"github.com/ieee0824/skyclad/config"
+	"github.com/ieee0824/skyclad/notifer"
 )
 
 type Observer struct {
@@ -63,7 +63,9 @@ func (o *Observer) Observe() error {
 					oldContainers = append(oldContainers, container)
 				}
 			}
-			fmt.Println(oldContainers)
+			if err := notifer.GetNotifer("").Notice(oldContainers); err != nil {
+				panic(err)
+			}
 		}
 	}
 }
