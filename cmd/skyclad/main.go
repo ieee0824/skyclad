@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 
+	_ "github.com/ieee0824/skyclad/plugins/slack"
+
 	"github.com/ieee0824/skyclad/config"
 	"github.com/ieee0824/skyclad/observer"
 )
