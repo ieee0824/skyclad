@@ -9,12 +9,14 @@ type Config struct {
 	AlertLimit time.Duration
 	Interval   time.Duration
 	Ignore     *regexp.Regexp
+	Notifer    string
 }
 
 func New(
 	al string,
 	interval string,
 	ignoreRule string,
+	notifer string,
 ) *Config {
 	ald, err := time.ParseDuration(al)
 	if err != nil {
@@ -33,5 +35,6 @@ func New(
 		AlertLimit: ald,
 		Interval:   id,
 		Ignore:     ignoreRuleRegexp,
+		Notifer:    notifer,
 	}
 }

@@ -23,12 +23,18 @@ func main() {
 		"",
 		"ignore container rule",
 	)
+	notifer := flag.String(
+		"n",
+		"",
+		"Notification destination. If it is empty, stdout.",
+	)
 	flag.Parse()
 
 	cfg := config.New(
 		*alertLimit,
 		*observeInterval,
 		*ignoreRule,
+		*notifer,
 	)
 
 	o := observer.New(cfg)

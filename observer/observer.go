@@ -63,7 +63,7 @@ func (o *Observer) Observe() error {
 					oldContainers = append(oldContainers, container)
 				}
 			}
-			if err := notifer.GetNotifer("").Notice(oldContainers); err != nil {
+			if err := notifer.GetNotifer(o.config.Notifer).Notice(oldContainers); err != nil {
 				panic(err)
 			}
 		}
