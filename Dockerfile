@@ -11,6 +11,7 @@ COPY . .
 
 RUN set -e \
     && cd cmd/skyclad \
+    && dep ensure \
     && CGO_ENABLED=0 go build .
 
 FROM docker:latest
