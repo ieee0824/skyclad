@@ -14,7 +14,13 @@ $ docker build -t skyclad .
 
 # run
 ```
+# output stdout
 $ docker run --rm --name skyclad -v /var/run/docker.sock:/var/run/docker.sock skyclad
+```
+or
+```
+# output slack
+$ docker run --rm --name skyclad -v /var/run/docker.sock:/var/run/docker.sock skyclad -slack-api ${SLACK_KEY} -n slack
 ```
 
 # License
