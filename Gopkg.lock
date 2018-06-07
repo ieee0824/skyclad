@@ -8,6 +8,12 @@
   version = "v1.2.0"
 
 [[projects]]
+  name = "github.com/ieee0824/getenv"
+  packages = ["."]
+  revision = "c0967c2a6018ada0a7537084588ee1e5084b09ac"
+  version = "v0.2"
+
+[[projects]]
   name = "github.com/ieee0824/sakuya"
   packages = ["."]
   revision = "86f1b71e80bfc7075db67d5fce4559c2bc2cbd5c"
@@ -22,6 +28,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ca0a63cf8fe081e9cf772b0bc4ca9bf8c517492f83078a68e3b690dc5fbb3a7e"
+  inputs-digest = "594aa60b3c59cf894269ff9d2d7b44902f3e829833d857bf7369d82acfc961db"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -5,8 +5,8 @@ import (
 	"flag"
 	"image/color"
 
+	"github.com/ieee0824/getenv"
 	"github.com/ieee0824/sakuya"
-
 	"github.com/ieee0824/skyclad/notifer"
 )
 
@@ -21,7 +21,7 @@ type Slack struct {
 
 func New() *Slack {
 	return &Slack{
-		APIURL: flag.String("slack-api", "", "slack incoming url"),
+		APIURL: flag.String("slack-api", getenv.String("SLACK_INCOMING_API_URL"), "slack incoming url. \"SLACK_INCOMING_API_URL\" may be specified as an environment variable."),
 	}
 }
 

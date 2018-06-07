@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/ieee0824/skyclad/plugins/slack"
 
+	"github.com/ieee0824/getenv"
 	"github.com/ieee0824/skyclad/config"
 	"github.com/ieee0824/skyclad/observer"
 )
@@ -12,22 +13,22 @@ import (
 func main() {
 	alertLimit := flag.String(
 		"lt",
-		"24h",
+		getenv.String("LIMIT_DURATION", "24h"),
 		"alert limit duration.",
 	)
 	observeInterval := flag.String(
 		"it",
-		"10s",
+		getenv.String("MONITORING_INTERVAL", "10m"),
 		"monitoring interval",
 	)
 	ignoreRule := flag.String(
 		"ignore",
-		"",
-		"ignore container rule",
+		getenv.String("IGNORE_RULE"),
+		"ignore container rule. Can use posix regexp.",
 	)
 	notifer := flag.String(
 		"n",
-		"",
+		getenv.String("NOTIFER_TYPE"),
 		"Notification destination. If it is empty, stdout.",
 	)
 	flag.Parse()
