@@ -24,7 +24,7 @@ func New(cfg *config.Config) *Observer {
 	}
 }
 
-func (o *Observer) observe(info clientio.GetContainerOutput) (bool, error) {
+func (o *Observer) observe(info *clientio.GetContainerOutput) (bool, error) {
 	now := time.Now()
 	uptime, err := o.client.GetUptime(info.ContainerID)
 	if err != nil {
@@ -32,6 +32,7 @@ func (o *Observer) observe(info clientio.GetContainerOutput) (bool, error) {
 	}
 
 	if o.config.AlertLimit < now.Sub(uptime) {
+		info.Uptime = &uptime
 		return true, nil
 	}
 	return false, nil
@@ -55,7 +56,7 @@ func (o *Observer) Observe() error {
 				if o.config.Ignore != nil && o.config.Ignore.MatchString(container.ImageName) {
 					continue
 				}
-				t, err := o.observe(container)
+				t, err := o.observe(&container)
 				if err != nil {
 					continue
 				}
