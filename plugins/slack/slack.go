@@ -9,6 +9,7 @@ import (
 	"github.com/ieee0824/getenv"
 	"github.com/ieee0824/sakuya"
 	"github.com/ieee0824/skyclad/client/io"
+	"github.com/ieee0824/skyclad/common"
 	"github.com/ieee0824/skyclad/notifer"
 )
 
@@ -26,7 +27,7 @@ type Slack struct {
 func New() *Slack {
 	return &Slack{
 		APIURL:   flag.String("slack-api", getenv.String("SLACK_INCOMING_API_URL"), "slack incoming url. \"SLACK_INCOMING_API_URL\" may be specified as an environment variable."),
-		Username: flag.String("slack-username", getenv.String("SLACK_USERNAME"), "slack username."),
+		Username: flag.String("slack-username", getenv.String("SLACK_USERNAME", "skyclad"), "slack username."),
 		Channel:  flag.String("slack-channel", "", "slack channel"),
 		Title:    flag.String("slack-title", "", "slack message title"),
 	}
@@ -40,12 +41,21 @@ func (s *Slack) Notice(v interface{}) error {
 	switch v := v.(type) {
 	case []clientio.GetContainerOutput:
 		w.AddTitle(*s.Title)
-		for _, o := range v {
+		a, err := common.NewArray(v)
+		if err != nil {
+			return err
+		}
+
+		g, err := a.GroupField("ImageName")
+		if err != nil {
+			return err
+		}
+		for key, o := range g {
 			bin, err := json.MarshalIndent(o, "", "  ")
 			if err != nil {
 				continue
 			}
-			w.AddInfo(string(bin))
+			w.AddInfo(fmt.Sprintf(`%v: %v`, key, string(bin)))
 		}
 
 		return w.Flush()
