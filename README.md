@@ -23,5 +23,10 @@ or
 $ docker run --rm --name skyclad -v /var/run/docker.sock:/var/run/docker.sock skyclad -slack-api ${SLACK_KEY} -n slack
 ```
 
+# help
+```
+$ skyclad -h
+```
+
 # License
 MIT
