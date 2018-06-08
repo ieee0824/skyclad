@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "outDir": "./build",
+    "inlineSourceMap": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
