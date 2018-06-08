@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "angular": "^1.7.0",
-    "global": "^4.3.2",
-    "typescript": "^2.9.1"
-  }
-}
